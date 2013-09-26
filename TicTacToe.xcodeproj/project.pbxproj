@@ -21,6 +21,7 @@
 		76CEEA0517F4C74800B56BC9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CEE9E717F4C74800B56BC9 /* UIKit.framework */; };
 		76CEEA0D17F4C74800B56BC9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76CEEA0B17F4C74800B56BC9 /* InfoPlist.strings */; };
 		76CEEA0F17F4C74800B56BC9 /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CEEA0E17F4C74800B56BC9 /* TicTacToeTests.m */; };
+		76CEEA1B17F4C7C100B56BC9 /* TTTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CEEA1A17F4C7C100B56BC9 /* TTTBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		76CEEA0A17F4C74800B56BC9 /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
 		76CEEA0C17F4C74800B56BC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		76CEEA0E17F4C74800B56BC9 /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		76CEEA1917F4C7C100B56BC9 /* TTTBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTBoard.h; path = Game/TTTBoard.h; sourceTree = "<group>"; };
+		76CEEA1A17F4C7C100B56BC9 /* TTTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTBoard.m; path = Game/TTTBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 		76CEE9E917F4C74800B56BC9 /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				76CEEA1817F4C79300B56BC9 /* Game */,
 				76CEE9F217F4C74800B56BC9 /* TTTAppDelegate.h */,
 				76CEE9F317F4C74800B56BC9 /* TTTAppDelegate.m */,
 				76CEE9F517F4C74800B56BC9 /* Main.storyboard */,
@@ -150,6 +154,15 @@
 				76CEEA0B17F4C74800B56BC9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76CEEA1817F4C79300B56BC9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				76CEEA1917F4C7C100B56BC9 /* TTTBoard.h */,
+				76CEEA1A17F4C7C100B56BC9 /* TTTBoard.m */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76CEE9FA17F4C74800B56BC9 /* TTTViewController.m in Sources */,
+				76CEEA1B17F4C7C100B56BC9 /* TTTBoard.m in Sources */,
 				76CEE9F017F4C74800B56BC9 /* main.m in Sources */,
 				76CEE9F417F4C74800B56BC9 /* TTTAppDelegate.m in Sources */,
 			);
