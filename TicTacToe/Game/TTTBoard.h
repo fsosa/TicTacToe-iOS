@@ -11,5 +11,8 @@
 @interface TTTBoard : NSObject
 
 - (void) moveMarker:(NSInteger)marker toLocation:(NSInteger)location;
+- (NSArray *) legalMoves;
+
+- (void) printGrid;
 
 @end
