@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76CD586E17F520C000948977 /* TTTComputer.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CD586D17F520C000948977 /* TTTComputer.m */; };
 		76CEE9E417F4C74800B56BC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CEE9E317F4C74800B56BC9 /* Foundation.framework */; };
 		76CEE9E617F4C74800B56BC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CEE9E517F4C74800B56BC9 /* CoreGraphics.framework */; };
 		76CEE9E817F4C74800B56BC9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CEE9E717F4C74800B56BC9 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		76CD586C17F520C000948977 /* TTTComputer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTComputer.h; path = Game/TTTComputer.h; sourceTree = "<group>"; };
+		76CD586D17F520C000948977 /* TTTComputer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTComputer.m; path = Game/TTTComputer.m; sourceTree = "<group>"; };
 		76CEE9E017F4C74800B56BC9 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76CEE9E317F4C74800B56BC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76CEE9E517F4C74800B56BC9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,6 +85,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76CD586F17F520D400948977 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				76CEE9F217F4C74800B56BC9 /* TTTAppDelegate.h */,
+				76CEE9F317F4C74800B56BC9 /* TTTAppDelegate.m */,
+				76CEE9F517F4C74800B56BC9 /* Main.storyboard */,
+				76CEE9F817F4C74800B56BC9 /* TTTViewController.h */,
+				76CEE9F917F4C74800B56BC9 /* TTTViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		76CEE9D717F4C74800B56BC9 = {
 			isa = PBXGroup;
 			children = (
@@ -116,11 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				76CEEA1817F4C79300B56BC9 /* Game */,
-				76CEE9F217F4C74800B56BC9 /* TTTAppDelegate.h */,
-				76CEE9F317F4C74800B56BC9 /* TTTAppDelegate.m */,
-				76CEE9F517F4C74800B56BC9 /* Main.storyboard */,
-				76CEE9F817F4C74800B56BC9 /* TTTViewController.h */,
-				76CEE9F917F4C74800B56BC9 /* TTTViewController.m */,
+				76CD586F17F520D400948977 /* UI */,
 				76CEE9FB17F4C74800B56BC9 /* Images.xcassets */,
 				76CEE9EA17F4C74800B56BC9 /* Supporting Files */,
 			);
@@ -161,6 +172,8 @@
 			children = (
 				76CEEA1917F4C7C100B56BC9 /* TTTBoard.h */,
 				76CEEA1A17F4C7C100B56BC9 /* TTTBoard.m */,
+				76CD586C17F520C000948977 /* TTTComputer.h */,
+				76CD586D17F520C000948977 /* TTTComputer.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -263,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76CD586E17F520C000948977 /* TTTComputer.m in Sources */,
 				76CEE9FA17F4C74800B56BC9 /* TTTViewController.m in Sources */,
 				76CEEA1B17F4C7C100B56BC9 /* TTTBoard.m in Sources */,
 				76CEE9F017F4C74800B56BC9 /* main.m in Sources */,
@@ -475,6 +489,7 @@
 				76CEEA1417F4C74800B56BC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76CEEA1517F4C74800B56BC9 /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +498,7 @@
 				76CEEA1717F4C74800B56BC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
