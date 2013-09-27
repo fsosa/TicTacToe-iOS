@@ -77,6 +77,7 @@
     
     self.humanMarker = TTTBoardMarkerO;
     
+    // Computer goes first
     // Calculating the first move is the most expensive so the feedback option displays "Computer Thinking" text to the user
     [self performComputerMoveWithFeedback:YES];
 }
