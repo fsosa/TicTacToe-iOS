@@ -12,7 +12,7 @@
 @interface TTTViewController ()
 
 @property (nonatomic, retain, readwrite) TTTBoard *board;
-@property (nonatomic, weak, readwrite) NSMutableArray *buttons;
+@property (nonatomic, retain, readwrite) NSMutableArray* buttons;
 
 @end
 
@@ -28,18 +28,25 @@
 }
 
 - (IBAction)gridButtonPressed:(id)sender {
-    // Find index of sender in button array
-    NSInteger index =    [self.buttons indexOfObjectIdenticalTo:sender];
-    NSLog(@"%i", index);
-    
-    UIButton *button = (UIButton*)sender;
+    NSInteger index = [sender tag];
 
-    
     [self.board moveMarker:-1 toLocation:index];
     [self.board printGrid];
     
     NSString *marker = [self.board markerAtLocation:index];
     [((UIButton*)sender) setTitle:marker forState:UIControlStateNormal];
+    
+    if ([self.board isGameComplete]) {
+        NSLog(@"Game done");
+    }
+}
+
+- (IBAction)resetButtonPressed:(id)sender {
+    [self.board resetGrid];
+    
+    for (UIButton *button in self.buttons) {
+        [button setTitle:@"" forState:UIControlStateNormal];
+    }
 }
 
 @end

@@ -111,7 +111,11 @@
     BOOL leftDiagonal = [self scoreForDiagonal:0];
     BOOL rightDiagonal = [self scoreForDiagonal:2];
     
-    return leftDiagonal || rightDiagonal;
+    if (leftDiagonal == 3 || leftDiagonal == -3 || rightDiagonal == 3 || rightDiagonal == -3) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (NSInteger) scoreForRow:(NSInteger)row {
@@ -146,7 +150,7 @@
 }
 
 - (NSInteger) scoreForDiagonal:(NSInteger)topCornerIndex {
-    if (topCornerIndex != 0 || topCornerIndex != 2) {
+    if (topCornerIndex != 0 &&  topCornerIndex != 2) {
         return 0;
     }
     

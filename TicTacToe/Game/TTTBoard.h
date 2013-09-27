@@ -17,6 +17,7 @@
 - (NSArray *) legalMoves;
 - (BOOL) isGameComplete;
 
+- (void) resetGrid;
 - (void) printGrid;
 
 @end
