@@ -32,10 +32,18 @@
 
 #pragma mark - Grid Operations
 
-- (void) moveMarker:(NSInteger)marker toLocation:(NSInteger)location {
+- (void) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location {
     if ([self isValidMove:location]) {
         NSNumber *mark = [NSNumber numberWithInt:marker];
         [self.grid replaceObjectAtIndex:location withObject:mark];
+        
+        // Notify the delegate to perform any necessary updates (e.g. UI)
+        NSString *markerString = [self markerAtLocation:location];
+        
+        if (!self.searchMode) {
+            [self.delegate didUpdateGridAtIndex:location withMarker:markerString];
+        }
+
     }
 }
 
@@ -75,47 +83,73 @@
     return NO;
 }
 
+- (TTTBoardMarker) winner {
+    NSInteger leftDiagonal = [self scoreForDiagonal:0];
+    NSInteger rightDiagonal = [self scoreForDiagonal:2];
+    
+    if (leftDiagonal == 3 || rightDiagonal == 3) {
+        return TTTBoardMarkerX;
+    }
+    
+    if (leftDiagonal == -3 || rightDiagonal == -3) {
+        return TTTBoardMarkerO;
+    }
+    
+    
+    for (int i = 0; i < 3; i++) {
+        int rowScore = [self scoreForRow:i];
+        int colScore = [self scoreForColumn:i];
+        
+        
+        if (rowScore == 3 || colScore == 3) {
+            return TTTBoardMarkerX;
+        }
+        
+        if (rowScore == -3 || colScore == -3) {
+            return TTTBoardMarkerO;
+        }
+    }
+    
+    return NO;
+    
+    
+    
+    return NO;
+}
+
 - (BOOL) isGameComplete {
     NSInteger movesLeft = [[self legalMoves] count];
     BOOL noRemainingMoves = movesLeft == 0;
+    BOOL gameWon = [self winner] == TTTBoardMarkerX || [self winner] == TTTBoardMarkerO;
     
-    return [self hasWinningRows] || [self hasWinningColumns] || [self hasWinningDiagonal] || noRemainingMoves;
+    return gameWon || noRemainingMoves;
 }
 
-- (BOOL) hasWinningRows {
-    for (int i = 0; i < 3; i++) {
-        int rowScore = [self scoreForRow:i];
-        
-        if (rowScore == 3 || rowScore == -3) {
-            return YES;
-        }
-    }
-    
-    return NO;
-    
-}
 
-- (BOOL) hasWinningColumns {
-    for (int i = 0; i < 3; i++) {
-        int colScore = [self scoreForColumn:i];
-        
-        if (colScore == 3 || colScore == -3) {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
+#pragma mark - Helper Methods
 
-- (BOOL) hasWinningDiagonal {
-    BOOL leftDiagonal = [self scoreForDiagonal:0];
-    BOOL rightDiagonal = [self scoreForDiagonal:2];
-    
-    if (leftDiagonal == 3 || leftDiagonal == -3 || rightDiagonal == 3 || rightDiagonal == -3) {
-        return YES;
+- (NSString *) markerAtLocation:(NSInteger)location {
+    if (location < 0 || location > 8) {
+        return @"";
     }
     
-    return NO;
+    NSInteger markerValue = [self.grid[location] integerValue];
+    
+    switch (markerValue) {
+        case 0:
+            return @"";
+            break;
+        case 1:
+            return @"X";
+            break;
+        case -1:
+            return @"O";
+            break;
+        default:
+            return @"";
+            break;
+    }
+
 }
 
 - (NSInteger) scoreForRow:(NSInteger)row {
@@ -166,41 +200,18 @@
 }
 
 
-
-
-#pragma mark - Helper Methods
-
-- (NSString *) markerAtLocation:(NSInteger)location {
-    if (location < 0 || location > 8) {
-        return @"";
-    }
-    
-    NSInteger markerValue = [self.grid[location] integerValue];
-    
-    switch (markerValue) {
-        case 0:
-            return @"";
-            break;
-        case 1:
-            return @"X";
-            break;
-        case -1:
-            return @"O";
-            break;
-        default:
-            return @"";
-            break;
-    }
-
-}
-
-
 - (void) resetGrid {
     self.grid = [NSMutableArray array];
     
     for (int i = 0; i < 9; i++) {
         [self.grid addObject:@0];
+        
+        if (!self.searchMode) {
+            [self.delegate didUpdateGridAtIndex:i withMarker:@""];
+        }
     }
+    
+    
 }
 
 - (void) printGrid {
@@ -212,6 +223,20 @@
     NSLog(@"----------");
     NSLog(@"%@ | %@ | %@", self.grid[6], self.grid[7], self.grid[8]);
     NSLog(@"");
+}
+
+- (TTTBoardMarker) opponentForMarker:(TTTBoardMarker)marker {
+    switch (marker) {
+        case TTTBoardMarkerO:
+            return TTTBoardMarkerX;
+            break;
+        case TTTBoardMarkerX:
+            return TTTBoardMarkerO;
+            break;
+        default:
+            return TTTBoardMarkerEmpty;
+            break;
+    }
 }
 
 
