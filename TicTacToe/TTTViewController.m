@@ -7,8 +7,12 @@
 //
 
 #import "TTTViewController.h"
+#import "TTTBoard.h"
 
 @interface TTTViewController ()
+
+@property (nonatomic, retain, readwrite) TTTBoard *board;
+@property (nonatomic, weak, readwrite) NSMutableArray *buttons;
 
 @end
 
@@ -17,13 +21,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.board = [[TTTBoard alloc] init];
+    self.buttons = [NSMutableArray arrayWithObjects:self.button0, self.button1, self.button2,
+                    self.button3, self.button4, self.button5, self.button6, self.button7, self.button8, nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)gridButtonPressed:(id)sender {
+    // Find index of sender in button array
+    NSInteger index =    [self.buttons indexOfObjectIdenticalTo:sender];
+    NSLog(@"%i", index);
+    
+    UIButton *button = (UIButton*)sender;
+
+    
+    [self.board moveMarker:-1 toLocation:index];
+    [self.board printGrid];
+    
+    NSString *marker = [self.board markerAtLocation:index];
+    [((UIButton*)sender) setTitle:marker forState:UIControlStateNormal];
 }
 
 @end

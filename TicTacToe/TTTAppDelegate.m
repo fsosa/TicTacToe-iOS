@@ -7,12 +7,24 @@
 //
 
 #import "TTTAppDelegate.h"
+#import "TTTBoard.h"
 
 @implementation TTTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+//    TTTBoard *board = [[TTTBoard alloc] init];
+//    [board printGrid];
+//    
+//    [board moveMarker:1 toLocation:4];
+//    [board printGrid];
+//    
+//    [board undoMoveAtLocation:4];
+//    [board printGrid];
+//    
+//    [board undoMoveAtLocation:1];
+//    [board printGrid];
+    
     return YES;
 }
 							
