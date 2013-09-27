@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+// TTBoardMarker represents all the possible markers on the Tic-Tac-Toe Board
 typedef enum TTTBoardMarker : NSUInteger {
     TTTBoardMarkerO = -1,
     TTTBoardMarkerEmpty = 0,
     TTTBoardMarkerX = 1,
 } TTTBoardMarker;
 
+
+// TTTBoardDelegate is used to inform delegates of updates to the game board
 @protocol TTTBoardDelegate <NSObject>
 
 - (void) didUpdateGridAtIndex:(NSInteger)index withMarker:(NSString*)marker;
@@ -26,7 +29,7 @@ typedef enum TTTBoardMarker : NSUInteger {
 @property (nonatomic, weak, readwrite) id<TTTBoardDelegate> delegate;
 @property (nonatomic, assign, readwrite) BOOL searchMode; // Denotes if the board is being searched an algorithm
 
-- (BOOL) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location; // Returns true if move made, false otherwise
+- (BOOL) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location;
 - (void) undoMoveAtLocation:(NSInteger)location;
 
 - (NSArray *) legalMoves;

@@ -12,6 +12,10 @@
 
 #pragma mark - Player Actions
 
+//
+// Calculates the best move available to the computer using the Negamax algorithm.
+// Takes a callback which is dispatched to the main thread with the best move as argument
+//
 - (void) moveMarker:(TTTBoardMarker)marker onBoard:(TTTBoard *)board withCallBack:(TTTIntegerBlock)callback{
     
     board.searchMode = YES;
@@ -23,6 +27,9 @@
 
 #pragma mark - AI Methods
 
+//
+// Calculates the best move using the Negamax algorith enhanced with alpha-beta pruning, recursively.
+//
 - (NSInteger) negamaxForMarker:(TTTBoardMarker)marker withBoard:(TTTBoard*)board depth:(NSInteger)depth alpha:(NSInteger)alpha beta:(NSInteger)beta {
     NSInteger bestMove = 0;
     NSInteger bestAlpha = -10000;
@@ -69,19 +76,24 @@
 }
 
 
-
+//
+// Scores a given board based on the current marker.
+//
 - (NSInteger) scoreBoard:(TTTBoard*)board asMarker:(TTTBoardMarker)marker {
     TTTBoardMarker winner = [board winner];
     TTTBoardMarker opponent = [board opponentForMarker:marker];
     
+    // Ideal outcome for the player, score highly
     if (winner == marker) {
         return 1;
     }
     
+    // Losing outcome for the player, score poorly
     if (winner == opponent) {
         return -1;
     }
     
+    // Otherwise, we have a draw
     return 0;
 }
 

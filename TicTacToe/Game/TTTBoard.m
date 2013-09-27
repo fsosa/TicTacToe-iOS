@@ -14,8 +14,8 @@
 
 @end
 
-@implementation TTTBoard
 
+@implementation TTTBoard
 
 #pragma mark - Lifecycle Methods
 
@@ -23,7 +23,6 @@
     self = [super init];
     
     if (self) {
-        // Initialize the grid representing our board
         [self resetGrid];
     }
     
@@ -151,6 +150,10 @@
 
 }
 
+//
+// Calculates a score for a given row (indexed from 0)
+// A score of 3 or -3 represents all X's or O's in the row, respectively.
+//
 - (NSInteger) scoreForRow:(NSInteger)row {
     if (row < 0 || row > 2) {
         return 0;
@@ -167,6 +170,10 @@
     return rowScore;
 }
 
+//
+// Calculates a score for a given column (indexed from 0)
+// A score of 3 or -3 represents all X's or O's in the column, respectively.
+//
 - (NSInteger) scoreForColumn:(NSInteger)column {
     if (column < 0 || column > 2) {
         return 0;
@@ -182,6 +189,10 @@
     return columnScore;
 }
 
+//
+// Calculates a score for a given diagonal, represented by the index of the diagonal's top corner (i.e. 0 or 2)
+// A score of 3 or -3 represents all X's or O's in the diagonal, respectively.
+//
 - (NSInteger) scoreForDiagonal:(NSInteger)topCornerIndex {
     if (topCornerIndex != 0 &&  topCornerIndex != 2) {
         return 0;
