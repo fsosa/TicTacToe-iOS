@@ -23,8 +23,13 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *oButton;
+@property (weak, nonatomic) IBOutlet UIButton *xButton;
 
 - (IBAction)gridButtonPressed:(id)sender;
 - (IBAction)resetButtonPressed:(id)sender;
+- (IBAction)oButtonPressed:(id)sender;
+- (IBAction)xButtonPressed:(id)sender;
+
 
 @end

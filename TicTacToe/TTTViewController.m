@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readwrite) NSMutableArray* buttons;
 @property (nonatomic, strong, readwrite) TTTComputer *computer;
 @property (nonatomic, assign, readwrite) BOOL gameStarted;
+@property (nonatomic, assign, readwrite) TTTBoardMarker humanMarker;
 
 @end
 
@@ -41,9 +42,12 @@
 #pragma mark - User Actions
 
 - (IBAction) gridButtonPressed:(id)sender {
+    // Reset the title label in case the user picked X
+    [self.titleLabel setText:@"Tic Tac Toe"];
+    
     NSInteger index = [sender tag];
     
-    BOOL playerDidMove = [self.board moveMarker:TTTBoardMarkerO toLocation:index];
+    BOOL playerDidMove = [self.board moveMarker:self.humanMarker toLocation:index];
     
     if (!playerDidMove) {
         return;
@@ -59,12 +63,32 @@
         [self.resetButton setTitle:@"Reset Game" forState:UIControlStateNormal];
     }
     
-    
     [self.titleLabel setText:@"Tic Tac Toe"];
     [self.board resetGrid];
     
+    [self.oButton setHidden:NO];
+    [self.xButton setHidden:NO];
+}
+
+
+- (IBAction)oButtonPressed:(id)sender {
+    [self.oButton setHidden:YES];
+    [self.xButton setHidden:YES];
+    
+    self.humanMarker = TTTBoardMarkerO;
+    
     // Calculating the first move is the most expensive so the feedback option displays "Computer Thinking" text to the user
     [self performComputerMoveWithFeedback:YES];
+}
+
+- (IBAction)xButtonPressed:(id)sender {
+    [self.oButton setHidden:YES];
+    [self.xButton setHidden:YES];
+    
+    [self setButtonsEnabled:YES];
+    
+    self.humanMarker = TTTBoardMarkerX;
+    [self.titleLabel setText:@"Your Move"];
 }
 
 #pragma mark - AI / Game Completion
@@ -74,18 +98,20 @@
     if (feedback) {
         [self.titleLabel setText:@"Computer Thinking..."];
     }
+    
+    TTTBoardMarker computerMarker = [self.board opponentForMarker:self.humanMarker];
 
     TTTVoidBlock calculateComputerMove = ^{
         
         // This callback update UI elements on the main thread and checks the game board after the computer's move
         TTTIntegerBlock performMove = ^(NSInteger move){
-            [self.board moveMarker:TTTBoardMarkerX toLocation:move];
+            [self.board moveMarker:computerMarker toLocation:move];
             [self.titleLabel setText:@"Tic Tac Toe"];
             [self setButtonsEnabled:YES];
             [self isGameComplete];
         };
         
-        [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board withCallBack:performMove];
+        [self.computer moveMarker:computerMarker onBoard:self.board withCallBack:performMove];
     };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

@@ -93,7 +93,7 @@
                                     <action selector="gridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BGI-bJ-fgB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py9-Rq-6gj" userLabel="Button7">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py9-Rq-6gj" userLabel="Button7">
                                 <rect key="frame" x="122" y="295" width="77" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -142,13 +142,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKQ-Hp-jVZ">
-                                <rect key="frame" x="109" y="508" width="106" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKQ-Hp-jVZ">
+                                <rect key="frame" x="109" y="445" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="106" id="Zpp-BR-x4J"/>
-                                    <constraint firstAttribute="height" constant="30" id="vjh-2p-mCo"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Start Game">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,11 +153,38 @@
                                     <action selector="resetButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v8R-KX-MXB"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ely-yd-Nqr">
+                                <rect key="frame" x="41" y="407" width="94" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Play as O">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="oButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fnZ-2H-7Fj"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVj-X3-2j4">
+                                <rect key="frame" x="198" y="405" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Play as X">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="xButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ino-yZ-U5s"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb9-37-HKK">
+                                <rect key="frame" x="139" y="532" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Uha-QI-VWD" firstAttribute="top" secondItem="WKQ-Hp-jVZ" secondAttribute="bottom" constant="30" id="Fpz-iL-mdq"/>
-                            <constraint firstItem="WKQ-Hp-jVZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="109" id="ZJd-wR-Hns"/>
+                            <constraint firstItem="Py9-Rq-6gj" firstAttribute="top" secondItem="WKQ-Hp-jVZ" secondAttribute="top" constant="-150" id="h91-z3-LN7"/>
                         </constraints>
                     </view>
                     <connections>
@@ -174,8 +197,10 @@
                         <outlet property="button6" destination="EVO-zF-Ojc" id="YKO-N7-Iyw"/>
                         <outlet property="button7" destination="Py9-Rq-6gj" id="jMA-jw-7A0"/>
                         <outlet property="button8" destination="6LM-Rw-6uz" id="Ahr-10-cce"/>
+                        <outlet property="oButton" destination="Ely-yd-Nqr" id="1Vr-tO-wD5"/>
                         <outlet property="resetButton" destination="WKQ-Hp-jVZ" id="Ybb-6p-59g"/>
                         <outlet property="titleLabel" destination="LuL-SL-4FU" id="9KJ-De-OMR"/>
+                        <outlet property="xButton" destination="TVj-X3-2j4" id="p1q-8x-DdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
