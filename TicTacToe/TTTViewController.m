@@ -12,10 +12,10 @@
 
 @interface TTTViewController ()
 
-@property (nonatomic, retain, readwrite) TTTBoard *board;
-@property (nonatomic, retain, readwrite) NSMutableArray* buttons;
-@property (nonatomic, assign, readwrite) BOOL gameInProgress;
-@property (nonatomic, retain, readwrite) TTTComputer *computer;
+@property (nonatomic, strong, readwrite) TTTBoard *board;
+@property (nonatomic, strong, readwrite) NSMutableArray* buttons;
+@property (nonatomic, strong, readwrite) TTTComputer *computer;
+@property (nonatomic, assign, readwrite) BOOL gameStarted;
 
 @end
 
@@ -41,27 +41,43 @@
 
 - (IBAction) gridButtonPressed:(id)sender {
     NSInteger index = [sender tag];
-
-    [self.board moveMarker:TTTBoardMarkerO toLocation:index];
-    [self.board printGrid];
+    
+    BOOL playerDidMove = [self.board moveMarker:TTTBoardMarkerO toLocation:index];
+    
+    if (!playerDidMove) {
+        return;
+    }
     
     [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board];
     
     if ([self.board isGameComplete]) {
-        NSLog(@"Game done");
+        TTTBoardMarker winningMarker = self.board.winner;
+        NSString *winner = [self.board stringForMarker:winningMarker];
+        
+        NSString *titleText;
+        if ([winner isEqualToString:@""]) {
+            titleText = @"Draw";
+        } else {
+            titleText = [NSString stringWithFormat:@"%@ wins", winner];
+        }
+        
+        [self.titleLabel setText:titleText];
+        [self setButtonsEnabled:NO];
     }
 }
 
 - (IBAction) resetButtonPressed:(id)sender {
-    self.gameInProgress = !self.gameInProgress;
     
-    if (self.gameInProgress) {
+    if (!self.gameStarted) {
+        self.gameStarted = YES;
         [self.resetButton setTitle:@"Reset Game" forState:UIControlStateNormal];
-        [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board];
-    } else {
-        [self.resetButton setTitle:@"Start Game" forState:UIControlStateNormal];
-        [self.board resetGrid];
     }
+    
+    
+    [self.titleLabel setText:@"Tic Tac Toe"];
+    [self.board resetGrid];
+    [self setButtonsEnabled:YES];
+    [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board];
 }
 
 #pragma mark - TTTBoardDelegate Methods
@@ -71,6 +87,14 @@
         if ([button tag] == index) {
             [button setTitle:marker forState:UIControlStateNormal];
         }
+    }
+}
+
+#pragma mark - Helper Methods
+
+- (void) setButtonsEnabled:(BOOL)enabled {
+    for (UIButton *button in self.buttons) {
+        [button setEnabled:enabled];
     }
 }
 

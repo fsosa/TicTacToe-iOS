@@ -32,19 +32,22 @@
 
 #pragma mark - Grid Operations
 
-- (void) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location {
+- (BOOL) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location {
     if ([self isValidMove:location]) {
         NSNumber *mark = [NSNumber numberWithInt:marker];
         [self.grid replaceObjectAtIndex:location withObject:mark];
         
         // Notify the delegate to perform any necessary updates (e.g. UI)
-        NSString *markerString = [self markerAtLocation:location];
+        NSString *markerString = [self stringForMarkerAtLocation:location];
         
         if (!self.searchMode) {
             [self.delegate didUpdateGridAtIndex:location withMarker:markerString];
         }
-
+        
+        return YES;
     }
+    
+    return NO;
 }
 
 - (void) undoMoveAtLocation:(NSInteger)location {
@@ -110,11 +113,7 @@
         }
     }
     
-    return NO;
-    
-    
-    
-    return NO;
+    return TTTBoardMarkerEmpty;
 }
 
 - (BOOL) isGameComplete {
@@ -128,7 +127,7 @@
 
 #pragma mark - Helper Methods
 
-- (NSString *) markerAtLocation:(NSInteger)location {
+- (NSString *) stringForMarkerAtLocation:(NSInteger)location {
     if (location < 0 || location > 8) {
         return @"";
     }
@@ -235,6 +234,20 @@
             break;
         default:
             return TTTBoardMarkerEmpty;
+            break;
+    }
+}
+
+- (NSString *) stringForMarker:(TTTBoardMarker)marker {
+    switch (marker) {
+        case TTTBoardMarkerO:
+            return @"O";
+            break;
+        case TTTBoardMarkerX:
+            return @"X";
+            break;
+        default:
+            return @"";
             break;
     }
 }

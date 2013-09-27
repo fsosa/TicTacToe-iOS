@@ -26,14 +26,15 @@ typedef enum TTTBoardMarker : NSUInteger {
 @property (nonatomic, weak, readwrite) id<TTTBoardDelegate> delegate;
 @property (nonatomic, assign, readwrite) BOOL searchMode; // Denotes if the board is being searched an algorithm
 
-- (void) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location;
+- (BOOL) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location; // Returns true if move made, false otherwise
 - (void) undoMoveAtLocation:(NSInteger)location;
 
 - (NSArray *) legalMoves;
 - (BOOL) isGameComplete;
 - (TTTBoardMarker) winner;
 
-- (NSString *) markerAtLocation:(NSInteger)location;
+- (NSString *) stringForMarkerAtLocation:(NSInteger)location;
+- (NSString *) stringForMarker:(TTTBoardMarker)marker;
 - (TTTBoardMarker) opponentForMarker:(TTTBoardMarker)marker;
 - (void) resetGrid;
 - (void) printGrid;
