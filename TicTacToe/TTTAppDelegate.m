@@ -13,18 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    TTTBoard *board = [[TTTBoard alloc] init];
-//    [board printGrid];
-//    
-//    [board moveMarker:1 toLocation:4];
-//    [board printGrid];
-//    
-//    [board undoMoveAtLocation:4];
-//    [board printGrid];
-//    
-//    [board undoMoveAtLocation:1];
-//    [board printGrid];
-    
     return YES;
 }
 							

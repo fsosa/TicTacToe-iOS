@@ -48,8 +48,50 @@
         return;
     }
     
-    [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board];
+    [self performComputerMoveWithFeedback:NO];
+}
+
+- (IBAction) resetButtonPressed:(id)sender {
     
+    if (!self.gameStarted) {
+        self.gameStarted = YES;
+        [self.resetButton setTitle:@"Reset Game" forState:UIControlStateNormal];
+    }
+    
+    
+    [self.titleLabel setText:@"Tic Tac Toe"];
+    [self.board resetGrid];
+    
+    // Calculating the first move is the most expensive so the feedback option displays "Computer Thinking" text to the user
+    [self performComputerMoveWithFeedback:YES];
+}
+
+#pragma mark - AI / Game Completion
+
+- (void) performComputerMoveWithFeedback:(BOOL)feedback {
+    
+    if (feedback) {
+        [self.titleLabel setText:@"Computer Thinking..."];
+    }
+
+    TTTVoidBlock calculateComputerMove = ^{
+        
+        // This callback update UI elements on the main thread and checks the game board after the computer's move
+        TTTIntegerBlock performMove = ^(NSInteger move){
+            [self.board moveMarker:TTTBoardMarkerX toLocation:move];
+            [self.titleLabel setText:@"Tic Tac Toe"];
+            [self setButtonsEnabled:YES];
+            [self isGameComplete];
+        };
+        
+        [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board withCallBack:performMove];
+    };
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, calculateComputerMove);
+}
+
+- (void) isGameComplete {
     if ([self.board isGameComplete]) {
         TTTBoardMarker winningMarker = self.board.winner;
         NSString *winner = [self.board stringForMarker:winningMarker];
@@ -66,28 +108,11 @@
     }
 }
 
-- (IBAction) resetButtonPressed:(id)sender {
-    
-    if (!self.gameStarted) {
-        self.gameStarted = YES;
-        [self.resetButton setTitle:@"Reset Game" forState:UIControlStateNormal];
-    }
-    
-    
-    [self.titleLabel setText:@"Tic Tac Toe"];
-    [self.board resetGrid];
-    [self setButtonsEnabled:YES];
-    [self.computer moveMarker:TTTBoardMarkerX onBoard:self.board];
-}
-
 #pragma mark - TTTBoardDelegate Methods
 
 - (void) didUpdateGridAtIndex:(NSInteger)index withMarker:(NSString*)marker {
-    for (UIButton *button in self.buttons) {
-        if ([button tag] == index) {
-            [button setTitle:marker forState:UIControlStateNormal];
-        }
-    }
+    UIButton *button = [self.buttons objectAtIndex:index];
+    [button setTitle:marker forState:UIControlStateNormal];
 }
 
 #pragma mark - Helper Methods

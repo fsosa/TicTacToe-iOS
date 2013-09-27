@@ -11,6 +11,6 @@
 
 @interface TTTComputer : NSObject
 
-- (void) moveMarker:(TTTBoardMarker)marker onBoard:(TTTBoard *) board;
+- (void) moveMarker:(TTTBoardMarker)marker onBoard:(TTTBoard *) board withCallBack:(TTTIntegerBlock)callback;
 
 @end

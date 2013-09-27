@@ -12,13 +12,13 @@
 
 #pragma mark - Player Actions
 
-- (void) moveMarker:(TTTBoardMarker)marker onBoard:(TTTBoard *)board {
+- (void) moveMarker:(TTTBoardMarker)marker onBoard:(TTTBoard *)board withCallBack:(TTTIntegerBlock)callback{
     
     board.searchMode = YES;
     NSInteger move = [self negamaxForMarker:marker withBoard:board depth:1 alpha:-10000 beta:10000];
     board.searchMode = NO;
     
-    [board moveMarker:marker toLocation:move];
+    DispatchMainThread(callback, move);
 }
 
 #pragma mark - AI Methods

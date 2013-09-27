@@ -34,7 +34,7 @@
 
 - (BOOL) moveMarker:(TTTBoardMarker)marker toLocation:(NSInteger)location {
     if ([self isValidMove:location]) {
-        NSNumber *mark = [NSNumber numberWithInt:marker];
+        NSNumber *mark = [NSNumber numberWithInt:(NSInteger)marker];
         [self.grid replaceObjectAtIndex:location withObject:mark];
         
         // Notify the delegate to perform any necessary updates (e.g. UI)
@@ -100,8 +100,8 @@
     
     
     for (int i = 0; i < 3; i++) {
-        int rowScore = [self scoreForRow:i];
-        int colScore = [self scoreForColumn:i];
+        NSInteger rowScore = [self scoreForRow:i];
+        NSInteger colScore = [self scoreForColumn:i];
         
         
         if (rowScore == 3 || colScore == 3) {

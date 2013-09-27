@@ -135,7 +135,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LuL-SL-4FU">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="LuL-SL-4FU">
                                 <rect key="frame" x="41" y="37" width="243" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
@@ -160,7 +160,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WKQ-Hp-jVZ" firstAttribute="centerX" secondItem="LuL-SL-4FU" secondAttribute="centerX" id="9eH-CY-9VT"/>
                             <constraint firstItem="Uha-QI-VWD" firstAttribute="top" secondItem="WKQ-Hp-jVZ" secondAttribute="bottom" constant="30" id="Fpz-iL-mdq"/>
                             <constraint firstItem="WKQ-Hp-jVZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="109" id="ZJd-wR-Hns"/>
                         </constraints>
