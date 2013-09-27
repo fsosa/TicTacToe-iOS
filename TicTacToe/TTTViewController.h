@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTBoard.h"
 
-@interface TTTViewController : UIViewController
+@interface TTTViewController : UIViewController <TTTBoardDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *button0;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
